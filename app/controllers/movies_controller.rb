@@ -14,6 +14,8 @@ class MoviesController < ApplicationController
         movie.description = item['description']
         movie.published_at = Time.new(item['pubDate'])
         movie.guid = item['guid'].split("movieId=").last
+        doc = Nokogiri::HTML(open(movie.origin_url))
+        movie.poster_url = doc.xpath('//p[contains(@class, "poster")]').xpath("a/img").attr("src").value()
         movie.save
       end
     end
