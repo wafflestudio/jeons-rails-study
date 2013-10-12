@@ -14,4 +14,8 @@
 #
 
 class Movie < ActiveRecord::Base
+
+  def poster_original_url
+    self.poster_url.gsub("C198x288", "R678x0")
+  end
 end

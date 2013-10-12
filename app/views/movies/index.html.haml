@@ -12,7 +12,7 @@
   .carousel-inner
     - @sampled_movies.each_with_index do |movie, i|
       %div{:class => "item#{" active" if i == 0}"}
-        = image_tag movie.poster_url, :"data-src" => "holder.js/100%x500/auto/#777:#7a7a7a"
+        = image_tag movie.poster_original_url, :"data-src" => "holder.js/100%x500/auto/#777:#7a7a7a"
         .container
           .carousel-caption
             %h1= movie.title
@@ -38,25 +38,14 @@
         %p= link_to "View details &raquo;".html_safe, movie.origin_url, :target => "_blank", :class => "btn btn-default"
       / /.col-lg-4
   / /.row
-  / START THE FEATURETTES
-  %hr.featurette-divider/
-  - @movies.each_with_index do |movie, i|
-    .row.featurette
-      - if i.even?
-        .col-md-7
-          %h2.featurette-heading
-            = movie.title
-            %span.text-muted= movie.published_at
-          %p.lead= movie.description
-        .col-md-5
-          = image_tag movie.poster_url, :class => "featurette-image img-responsive", :"data-src" => "holder.js/500x500/auto"
-      - else
-        .col-md-5
-          = image_tag movie.poster_url, :class => "featurette-image img-responsive", :"data-src" => "holder.js/500x500/auto"
-        .col-md-7
-          %h2.featurette-heading
-            = movie.title
-            %span.text-muted= movie.published_at
-          %p.lead= movie.description
-    %hr.featurette-divider/
-  / /END THE FEATURETTES
+  - @movies.each_slice(3).each_with_index do |movies, i|
+    %hr
+    .row
+      - movies.each_with_index do |movie, i|
+        .col-lg-4
+          = image_tag movie.poster_url, :"data-src" => "holder.js/140x140/auto"
+          %h2= movie.title
+          %p= movie.description
+          %p= link_to "View details &raquo;".html_safe, movie.origin_url, :target => "_blank", :class => "btn btn-default"
+        / /.col-lg-4
+    / /.row

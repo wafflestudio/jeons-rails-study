@@ -33,7 +33,7 @@
             .navbar-collapse.collapse
               %ul.nav.navbar-nav
                 %li.active
-                  %a{:href => "/"} Home
+                  = link_to "Home", root_path
                 %li.dropdown
                   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                     Theme
