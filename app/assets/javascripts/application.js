@@ -15,4 +15,4 @@
 //= require turbolinks
 //= require twitter/bootstrap
 //= require bootstrap-datetimepicker.min
-//= require_tree .
+//= require_self
