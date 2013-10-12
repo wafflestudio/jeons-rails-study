@@ -1,0 +1,62 @@
+/
+  Carousel
+  \==================================================
+#myCarousel.carousel.slide
+  / Indicators
+  %ol.carousel-indicators
+    - @sampled_movies.each_with_index do |movie, i|
+      - if i == 0
+        %li{:class => "active", "data-slide-to" => i, "data-target" => "#myCarousel"}
+      - else
+        %li{"data-slide-to" => i, "data-target" => "#myCarousel"}
+  .carousel-inner
+    - @sampled_movies.each_with_index do |movie, i|
+      %div{:class => "item#{" active" if i == 0}"}
+        = image_tag movie.poster_url, :class => "img-circle", :"data-src" => "holder.js/100%x500/auto/#777:#7a7a7a"
+        .container
+          .carousel-caption
+            %h1= movie.title
+            %p= movie.description
+            %p= link_to "More", movie.origin_url, :target => "_blank", :class => "btn btn-larget btn-primary"
+  %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
+    %span.glyphicon.glyphicon-chevron-left
+  %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"}
+    %span.glyphicon.glyphicon-chevron-right
+/ /.carousel
+/
+  Marketing messaging and featurettes
+  \==================================================
+/ Wrap the rest of the page in another container to center all the content.
+.container.marketing
+  / Three columns of text below the carousel
+  .row
+    - @sampled_movies.each_with_index do |movie, i|
+      .col-lg-4
+        = image_tag movie.poster_url, :class => "img-circle", :"data-src" => "holder.js/140x140/auto"
+        %h2= movie.title
+        %p= movie.description
+        %p= link_to "View details &raquo;".html_safe, movie.origin_url, :target => "_blank", :class => "btn btn-default"
+      / /.col-lg-4
+  / /.row
+  / START THE FEATURETTES
+  %hr.featurette-divider/
+  - @movies.each_with_index do |movie, i|
+    .row.featurette
+      - if i.even?
+        .col-md-7
+          %h2.featurette-heading
+            = movie.title
+            %span.text-muted= movie.published_at
+          %p.lead= movie.description
+        .col-md-5
+          = image_tag movie.poster_url, :class => "featurette-image img-responsive", :"data-src" => "holder.js/500x500/auto"
+      - else
+        .col-md-5
+          = image_tag movie.poster_url, :class => "featurette-image img-responsive", :"data-src" => "holder.js/500x500/auto"
+        .col-md-7
+          %h2.featurette-heading
+            = movie.title
+            %span.text-muted= movie.published_at
+          %p.lead= movie.description
+    %hr.featurette-divider/
+  / /END THE FEATURETTES

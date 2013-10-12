@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "전재호의 쩌는 스터디 숙제#1 영화 개봉 일정", :name => "description"}/
+    %meta{:content => "Taekmin Kim", :name => "author"}/
+    = csrf_meta_tags
+    %title MovieHw
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    - if params[:theme]
+      = stylesheet_link_tag "http://bootswatch.com/#{params[:theme]}/bootstrap.css"
+      = stylesheet_link_tag "http://bootswatch.com/bower_components/font-awesome/css/font-awesome.min.css"
+      - stylesheet_link_tag "http://bootswatch.com/assets/css/bootswatch.min.css"
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      = javascript_include_tag "application-ie", "data-turbolinks-track" => true
+  /
+    NAVBAR
+    \==================================================
+  %body
+    .navbar-wrapper
+      .container
+        .navbar.navbar-inverse.navbar-static-top
+          .container
+            .navbar-header
+              %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              = link_to "Movie", root_path, :class => "navbar-brand"
+            .navbar-collapse.collapse
+              %ul.nav.navbar-nav
+                %li.active
+                  %a{:href => "/"} Home
+                %li.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    Theme
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      =link_to "Default", {:theme => ""}, :"data-no-turbolink" => true
+                    - ["Amelia", "Cerulean", "Cosmo", "Cyborg", "Flatly", "Readable", "Simplex", "Slate", "Spacelab", "United"].each do |theme|
+                      %li
+                        =link_to theme, {:theme => theme.downcase}, :"data-no-turbolink" => true
+    = yield
+    .container.marketing
+      / FOOTER
+      %footer
+        %p.pull-right
+          %a{:href => "#"} Back to top
+        %p
+          \&copy; 2013 #{link_to "tantara.", "https://facebook.com/taekmin.kim", :target => "_blank"} &middot;
+          %a{:href => "#privacy"} Privacy
+          \&middot;
+          %a{:href => "#terms"} Terms
+    / /.container

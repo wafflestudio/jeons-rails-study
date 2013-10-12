@@ -1,0 +1,22 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @movie.title
+%p
+  %strong Description:
+  = @movie.description
+%p
+  %strong Poster url:
+  = @movie.poster_url
+%p
+  %strong Origin url:
+  = @movie.origin_url
+%p
+  %strong Published at:
+  = @movie.published_at
+%p
+  %strong Guid:
+  = @movie.guid
+= link_to 'Edit', edit_movie_path(@movie)
+|
+\#{link_to 'Back', movies_path}
